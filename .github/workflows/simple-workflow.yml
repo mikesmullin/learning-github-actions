@@ -29,21 +29,21 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: merge-cascade
         run: |
+          env &&
           git config --global user.email "automergebot@abk.com" &&
           git config --global user.name "AutoMerge" &&
 
-          BRANCH=$(git rev-parse --abbrev-ref HEAD) &&
-          echo rebase main into branch $BRANCH... &&
+          echo rebase main into branch $GITHUB_HEAD_REF... &&
           git fetch origin main &&
           git checkout main &&
           git pull &&
-          git checkout $BRANCH &&
+          git checkout $GITHUB_HEAD_REF &&
           git rebase main &&
-          git push -f origin $BRANCH &&
+          git push -f origin $GITHUB_HEAD_REF &&
 
           echo merge branch into main... &&
           git checkout main &&
-          git merge $BRANCH &&
+          git merge $GITHUB_HEAD_REF &&
           git push origin main &&
 
           echo merge main into stage... &&
@@ -61,5 +61,5 @@ jobs:
           git push -f origin dev &&
 
           echo delete branch... &&
-          git branch -D $BRANCH &&
-          git push origin :$BRANCH
+          git branch -D $GITHUB_HEAD_REF &&
+          git push origin :$GITHUB_HEAD_REF
