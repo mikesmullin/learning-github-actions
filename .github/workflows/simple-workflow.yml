@@ -29,7 +29,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: merge-cascade
         run: |
-          env &&
           git config --global user.email "automergebot@abk.com" &&
           git config --global user.name "AutoMerge" &&
 
