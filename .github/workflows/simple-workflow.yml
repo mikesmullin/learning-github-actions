@@ -27,7 +27,7 @@ jobs:
       - name: merge-cascade
         run: |
           BRANCH=$(git rev-parse --abbrev-ref HEAD) &&
-          echo rebase main into branch... &&
+          echo rebase main into branch $BRANCH... &&
           git checkout main &&
           git pull &&
           git checkout $BRANCH &&
