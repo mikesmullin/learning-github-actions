@@ -26,6 +26,9 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: merge-cascade
         run: |
+          git config --global user.email "automergebot@abk.com" &&
+          git config --global user.name "AutoMerge" &&
+
           BRANCH=$(git rev-parse --abbrev-ref HEAD) &&
           echo rebase main into branch $BRANCH... &&
           git fetch origin main &&
